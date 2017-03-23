@@ -14,6 +14,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.fairdeal.domain.Cart;
 import com.niit.fairdeal.domain.Category;
 import com.niit.fairdeal.domain.Product;
 import com.niit.fairdeal.domain.Supplier;
@@ -23,6 +24,7 @@ import com.niit.fairdeal.domain.User;
 @ComponentScan("com.niit.fairdeal")
 @EnableTransactionManagement
 public class ApplicationContextConfig {
+	
 	@Bean(name = "dataSource")
 	public DataSource getH2DataSource() {
 
@@ -52,15 +54,16 @@ public class ApplicationContextConfig {
 	@Autowired
 	@Bean(name = "sessionFactory")
 	public SessionFactory getSessionFactory(DataSource dataSource) {
-
 		
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
+		
 		sessionBuilder.addProperties(getHibernateProperties());
 
 		sessionBuilder.addAnnotatedClasses(Category.class);
 		sessionBuilder.addAnnotatedClass(User.class);
 		sessionBuilder.addAnnotatedClass(Product.class);
 		sessionBuilder.addAnnotatedClass(Supplier.class);
+		sessionBuilder.addAnnotatedClass(Cart.class);
 		
 		//Alternate to above steps, you can add all the domain objects using the following stmts
 		//sessionBuilder.scanPackages("com.niit.fairdeal.domain");
