@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -23,16 +24,19 @@ public class Cart {
 	@Column(name="user_id")
 	private String userID;
 	
+	@NotEmpty
 	private int price;
 	
 	@Column(name="product_name")
 	private String productName;
 
+	@NotEmpty
 	private char status;
 	
 	@Column(name="added_date")
 	private Date addedDate;
 	
+	@NotEmpty
 	private int quantity;
 
 	public int getId() {

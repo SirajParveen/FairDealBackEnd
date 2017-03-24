@@ -42,7 +42,7 @@ public class UserTestCase {
 	@Test
 	public void createUserTestCase()
 	{
-		user.setID("04");
+		user.setId("04");
 		user.setName("Pooja");
 		user.setPassword("pooja");
 		user.setMail("pooja@gmail.com");
@@ -57,7 +57,7 @@ public class UserTestCase {
 	@Test
 	public void updateUserTestCase()
 	{
-		user.setID("03");
+		user.setId("03");
 		user.setName("Akhil");
 		user.setPassword("akhil");
 		user.setContact("8765432467");

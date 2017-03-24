@@ -57,8 +57,8 @@ public class UserDAOImpl implements UserDAO {
 	public boolean deleteUser(User user) {
 		User user1 = null;
 		try {
-			if(user.getID() != null)
-				user1 = getUserByID(user.getID());
+			if(user.getId() != null)
+				user1 = getUserByID(user.getId());
 			else if(user.getName() != null)
 				user1 = getUserByName(user.getName());
 			getSession().delete(user1);

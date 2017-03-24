@@ -1,7 +1,10 @@
 package com.niit.fairdeal.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
@@ -9,70 +12,88 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 public class User {
+	
+	// Please add validations related annotations in other domain objects also
 
 	@Id
-	private String ID;
+	private String id;
 	
-	@NotEmpty
-	private String Name;
+/*	@NotEmpty(message="User name should not be empty")*/
+	private String name;
 	
-	@NotEmpty
-	private String Password;
+/*	@NotEmpty(message="Password should not be empty")
+	@Min(5)
+	@Max(15)*/
+	private String password;
 	
-	@NotEmpty
-	private String Mail;
+/*	@NotEmpty
+	@Column(unique=true, nullable=false)*/
+	private String mail;
 
-	@NotEmpty
-	private String Contact;
+	/*@NotEmpty*/
+	private String contact;
 	
-	@NotEmpty
-	private String Role;
+/*	@NotEmpty*/
+	private String role;
 
-	public String getID() {
-		return ID;
+	private boolean enabled;
+
+	public String getId() {
+		return id;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 
 	public String getMail() {
-		return Mail;
+		return mail;
 	}
 
 	public void setMail(String mail) {
-		Mail = mail;
+		this.mail = mail;
 	}
-	
+
 	public String getContact() {
-		return Contact;
+		return contact;
 	}
 
 	public void setContact(String contact) {
-		Contact = contact;
+		this.contact = contact;
 	}
 
 	public String getRole() {
-		return Role;
+		return role;
 	}
 
 	public void setRole(String role) {
-		Role = role;
+		this.role = role;
 	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
+	
 }
