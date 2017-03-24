@@ -15,39 +15,46 @@ import org.springframework.stereotype.Component;
 public class Supplier {
 	
 	@Id
-	private String ID;
+	private String id;
 	
 	@NotEmpty(message="Supplier name should not be empty")
-	private String Name;
+	private String name;
 	
 	@NotEmpty
-	private String Address;
+	private String address;
 	
 	@OneToMany(mappedBy="supplier",fetch = FetchType.EAGER)
 	private Set<Product> products;
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public Set<Product> getProducts() {
 		return products;
 	}
+
 	public void setProducts(Set<Product> products) {
 		this.products = products;
-	}
-	public String getID() {
-		return ID;
-	}
-	public void setID(String iD) {
-		ID = iD;
-	}
-	public String getName() {
-		return Name;
-	}
-	public void setName(String name) {
-		Name = name;
-	}
-	public String getAddress() {
-		return Address;
-	}
-	public void setAddress(String address) {
-		Address = address;
 	}
 }

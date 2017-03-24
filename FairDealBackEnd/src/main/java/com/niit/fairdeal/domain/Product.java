@@ -16,22 +16,22 @@ import org.springframework.web.multipart.MultipartFile;
 public class Product {
 	
 	@Id
-	private String ID;
+	private String id;
 	
 	@NotEmpty(message="Product name should not be empty")
-	private String Name;
+	private String name;
 	
 	@NotEmpty
-	private String Price;
+	private String price;
 	
 	@NotEmpty
-	private String Description;
+	private String description;
 	
 	@NotEmpty
-	private String Category_ID; 
+	private String category_id; 
 	
 	@NotEmpty
-	private String Supplier_ID;
+	private String supplier_id;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "category_id", updatable = false, insertable = false, nullable = false)
@@ -44,59 +44,76 @@ public class Product {
 	//Will not persist in database
 	@Transient
 	private MultipartFile image;
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getCategory_id() {
+		return category_id;
+	}
+
+	public void setCategory_id(String category_id) {
+		this.category_id = category_id;
+	}
+
+	public String getSupplier_id() {
+		return supplier_id;
+	}
+
+	public void setSupplier_id(String supplier_id) {
+		this.supplier_id = supplier_id;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
+
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
 	public Supplier getSupplier() {
 		return supplier;
 	}
+
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
+
 	public MultipartFile getImage() {
 		return image;
 	}
+
 	public void setImage(MultipartFile image) {
 		this.image = image;
 	}
-	public String getID() {
-		return ID;
-	}
-	public void setID(String iD) {
-		ID = iD;
-	}
-	public String getName() {
-		return Name;
-	}
-	public void setName(String name) {
-		Name = name;
-	}
-	public String getPrice() {
-		return Price;
-	}
-	public void setPrice(String price) {
-		Price = price;
-	}
-	public String getDescription() {
-		return Description;
-	}
-	public void setDescription(String description) {
-		Description = description;
-	}
-	public String getCategory_ID() {
-		return Category_ID;
-	}
-	public void setCategory_ID(String category_ID) {
-		Category_ID = category_ID;
-	}
-	public String getSupplier_ID() {
-		return Supplier_ID;
-	}
-	public void setSupplier_ID(String supplier_ID) {
-		Supplier_ID = supplier_ID;
-	} 
 }

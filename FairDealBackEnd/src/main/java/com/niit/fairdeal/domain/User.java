@@ -1,48 +1,46 @@
 package com.niit.fairdeal.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Entity
+@Table(name="user_details")
 @Component
 public class User {
 	
 	// Please add validations related annotations in other domain objects also
 
 	@Id
-	private String id;
+	@GeneratedValue
+	private int id;
 	
-/*	@NotEmpty(message="User name should not be empty")*/
+	@NotEmpty(message="User name should not be empty")
 	private String name;
 	
-/*	@NotEmpty(message="Password should not be empty")
-	@Min(5)
+	@NotEmpty(message="Password should not be empty")
+	/*@Min(5)
 	@Max(15)*/
 	private String password;
 	
-/*	@NotEmpty
-	@Column(unique=true, nullable=false)*/
+	@NotEmpty
+	@Column(unique=true, nullable=false)
 	private String mail;
 
-	/*@NotEmpty*/
+	@NotEmpty
 	private String contact;
 	
-/*	@NotEmpty*/
+	@NotEmpty
 	private String role;
 
 	private boolean enabled;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

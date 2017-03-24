@@ -1,4 +1,4 @@
-package com.niit.fairdeal.testcase;
+/*package com.niit.fairdeal.testcase;
 
 import static org.junit.Assert.*;
 
@@ -31,12 +31,12 @@ public class CategoryTestCase {
 	
 	// TEST CASES
 
-	/*@Test
+	@Test
 	public void getAllCategoriesTestCase() {
 		int recordsFromDB = categoryDAO.getAllCategories().size();
 
 		assertEquals("getAllCategoriesTestCase", 12, recordsFromDB);
-	}*/
+	}
 
 	@Test
 	public void createCategoryTestCase() {
@@ -51,7 +51,7 @@ public class CategoryTestCase {
 		assertEquals("createCategoryTestCase", true, flag);
 	}
 
-	/*@Test
+	@Test
 	public void updateCategoryTestCase() {
 
 		category.setID("14");
@@ -87,5 +87,5 @@ public class CategoryTestCase {
 		category = categoryDAO.getCategoryByName("Women Category");
 		
 		assertEquals("getCategoryByNameTestCase", null, category);
-	}*/
-}
+	}
+}*/

@@ -21,40 +21,40 @@ public class Category {
 	// generate getter/setter methods
 
 	@Id
-	private String ID;
+	private String id;
 	
 	@Column(name = "name")  // if the field name and property name is different
 	@NotEmpty(message="Category name should not be empty")
-	private String Name;
+	private String name;
 	
 	@NotEmpty
-	private String Description;
+	private String description;
 	
 	@OneToMany(mappedBy="category",fetch = FetchType.EAGER)
 	private Set<Product> products;
-	
-	public String getID() {
-		return ID;
+
+	public String getId() {
+		return id;
 	}
 
-	public void setID(String iD) {
-		ID = iD;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public String getDescription() {
-		return Description;
+		return description;
 	}
 
 	public void setDescription(String description) {
-		Description = description;
+		this.description = description;
 	}
 
 	public Set<Product> getProducts() {

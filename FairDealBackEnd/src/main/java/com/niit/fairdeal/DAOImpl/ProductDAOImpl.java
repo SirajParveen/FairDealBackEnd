@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,24 +15,27 @@ import com.niit.fairdeal.domain.Product;
 @Repository("productDAO")
 public class ProductDAOImpl implements ProductDAO {
 	
+	
+
+	public ProductDAOImpl(SessionFactory sessionFactory) {
+	
+		this.sessionFactory = sessionFactory;
+	}
+
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public Session getSession()
-	{
-		return sessionFactory.getCurrentSession();
-	}
 
 	@SuppressWarnings("unchecked")
 	public List<Product> getAllProducts() {
 		
-		return	getSession().createQuery("from Product").list();
+		return sessionFactory.getCurrentSession().createQuery("from Product").list();
 	}
 
 	public boolean createProduct(Product product) {
 		try
 		{
-		getSession().save(product);
+			sessionFactory.getCurrentSession().save(product);
 		return true;
 		} catch(Exception e)
 		{
@@ -44,7 +46,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	public boolean updateProduct(Product product) {
 		try {
-			getSession().update(product);
+			sessionFactory.getCurrentSession().update(product);
 			return true;
 		} 
 		catch (Exception e) {
@@ -56,11 +58,11 @@ public class ProductDAOImpl implements ProductDAO {
 	public boolean deleteProduct(Product product) {
 		Product product1 = null;
 		try {
-			if(product.getID() != null)
-				product1 = getProductByID(product.getID());
+			if(product.getId() != null)
+				product1 = getProductByID(product.getId());
 			else if(product.getName() != null)
 				product1 = getProductByName(product.getName());
-			getSession().delete(product1);
+			sessionFactory.getCurrentSession().delete(product1);
 			return true;
 		} 
 		catch (Exception e) {
@@ -71,11 +73,11 @@ public class ProductDAOImpl implements ProductDAO {
 
 	public Product getProductByID(String id) {
 		
-		return (Product) getSession().get(Product.class, id);
+		return (Product)sessionFactory.getCurrentSession().get(Product.class, id);
 	}
 
 	public Product getProductByName(String name) {
 		
-		return (Product) getSession().createQuery("from Product where name ='"+name+"'").list().get(0);
+		return (Product) sessionFactory.getCurrentSession().createQuery("from Product where name ='"+name+"'").list().get(0);
 	}
 }

@@ -1,4 +1,4 @@
-package com.niit.fairdeal.testcase;
+/*package com.niit.fairdeal.testcase;
 
 import org.junit.BeforeClass;
 import static org.junit.Assert.*;
@@ -31,14 +31,14 @@ public class CartTestCase
 
 	}
 	
-	/*@Test
+	@Test
 	public void getAllCartsTestCase(String userID)
 	{
 		int recordsFromDB = cartDAO.getAllCarts("01").size();
 		assertEquals("getAllCartsTestCase", 12, recordsFromDB);
 	}
-	*/
-	/*@Test
+	
+	@Test
 	public void saveCartTestCase()
 	{
 		cart.setId(100L);
@@ -51,20 +51,20 @@ public class CartTestCase
 		boolean flag = cartDAO.saveCart(cart);
 		assertEquals("saveCartTestCase", true, flag);
 	}
-	*/
-	/*@Test
+	
+	@Test
 	public void getTotalAmountTestCase()
 	{
 		Long flag = cartDAO.getTotalAmount("04");
 		assertEquals("getTotalAmountTestCase", null, flag);	
-	}*/
-	/*
+	}
+	
 	@Test
 	public Cart get(String id)
 	{
 		
 	}
-	*/
+	
 	@Test
 	public void deleteCartTestCase()
 	{
@@ -72,10 +72,11 @@ public class CartTestCase
 		boolean flag = cartDAO.deleteCart(cart);
 		assertEquals("deleteCartTestCase", true, flag);
 	}
-	/*
+	
 	@Test
 	public boolean updateCart(Cart cart)
 	{
 		
-	}*/
+	}
 }
+*/

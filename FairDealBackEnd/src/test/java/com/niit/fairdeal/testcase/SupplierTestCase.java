@@ -1,4 +1,4 @@
-package com.niit.fairdeal.testcase;
+/*package com.niit.fairdeal.testcase;
 
 import static org.junit.Assert.*;
 
@@ -89,3 +89,4 @@ public class SupplierTestCase {
 		assertEquals("getSupplierByNameTestCase", null, supplier);
 	}
 }
+*/

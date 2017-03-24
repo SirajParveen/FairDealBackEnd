@@ -115,8 +115,8 @@ public class CategoryDAOImpl implements CategoryDAO
 		log.info("Going go delete :"+category);
 		Category category1 = null;
 		try {
-			if(category.getID() != null)
-				category1 = getCategoryByID(category.getID());
+			if(category.getId() != null)
+				category1 = getCategoryByID(category.getId());
 			else if(category.getName() != null)
 				category1 = getCategoryByName(category.getName());
 			getSession().delete(category1);
