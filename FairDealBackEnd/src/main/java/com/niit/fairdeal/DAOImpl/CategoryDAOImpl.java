@@ -21,17 +21,13 @@ import com.niit.fairdeal.domain.Category;
 public class CategoryDAOImpl implements CategoryDAO 
 {
 	private static final Logger log = LoggerFactory.getLogger(CategoryDAOImpl.class);
-	
-	public CategoryDAOImpl()
-	{
-		
-	}
 
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	public CategoryDAOImpl(SessionFactory sessionFactory) 
 	{
+		log.info("Category Session");
 		this.sessionFactory = sessionFactory;
 	}
 	
@@ -44,7 +40,6 @@ public class CategoryDAOImpl implements CategoryDAO
 	@Transactional
 	public List<Category> getAllCategories() {
 		
-		/*return getSession().createQuery("from Category").list();*/
 		log.debug("Starting of the method getAllCategories");
 		
 		String hql = "from Category";
@@ -68,28 +63,11 @@ public class CategoryDAOImpl implements CategoryDAO
 		catch(Exception e)
 		{
 			e.printStackTrace(); 
-			log.error("Exception occured while saving category");
+			log.error("Exception occurred while creating category");
 			log.error(e.getMessage());
 			return false;
 		}	
 	}
-	
-	/*@Transactional
-	public boolean saveOrUpdate(Category category) { 
-		
-		log.debug("Starting of the method saveOrUpdate");
-		try {
-			getSession().saveOrUpdate(category);
-			log.debug("Ending of the method saveOrUpdate");
-			return true;
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
-			log.error("Exception occured while saveOrUpdate category");
-			log.error(e.getMessage());
-			return false;
-		}	
-	}*/
 
 	@Transactional
 	public boolean updateCategory(Category category) {
@@ -102,7 +80,7 @@ public class CategoryDAOImpl implements CategoryDAO
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
-			log.error("Exception occured while update category");
+			log.error("Exception occurred while updating category");
 			log.error(e.getMessage());
 			return false;
 		}
@@ -111,28 +89,23 @@ public class CategoryDAOImpl implements CategoryDAO
 	@Transactional
 	public boolean deleteCategory(Category category) {
 		
-		log.debug("Starting of the method delete");
-		log.info("Going go delete :"+category);
-		Category category1 = null;
+		log.debug("Starting of the method deleteCategory");
 		try {
-			if(category.getId() != null)
-				category1 = getCategoryByID(category.getId());
-			else if(category.getName() != null)
-				category1 = getCategoryByName(category.getName());
-			getSession().delete(category1);
+			getSession().delete(category);
 			log.debug("Ending of the method deleteCategory");
 			return true;
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			return false;	
+			log.error("Exception occurred while deleting category");
+			log.error(e.getMessage());
+			return false;
 		}
 	}
 
 	@Transactional
-	public Category getCategoryByID(String id) {
+	public Category getCategoryByID(int id) {
 		
-		log.debug("Calling get");
+		log.debug("Starting of the method getCategoryByID");
 		
 		String hql = "from Category where id=" + "'"+ id +"'";
 		
@@ -148,20 +121,21 @@ public class CategoryDAOImpl implements CategoryDAO
 		{
 			return listCategory.get(0);
 		}
-		log.debug("Ending getCategoryByID");
+		log.debug("Ending of the method getCategoryByID");
 		return null;
 	}
 
+	@Transactional
 	public Category getCategoryByName(String name) {
 		
-		log.debug("Calling getCategoryByName");
+		log.debug("Starting of the method getCategoryByName");
 		
 		String hql = "from Category where name=" + "'"+ name +"'";
 		
 		@SuppressWarnings("rawtypes")
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		
-		log.debug("Ending getCategoryByName");
+		log.debug("Ending of the method getCategoryByName");
 		
 		return (Category)query.uniqueResult();
 		

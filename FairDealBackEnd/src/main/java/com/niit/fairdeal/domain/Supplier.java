@@ -4,18 +4,22 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
+@Table(name= "Supplier")
 public class Supplier {
 	
 	@Id
-	private String id;
+	@GeneratedValue
+	private int id;
 	
 	@NotEmpty(message="Supplier name should not be empty")
 	private String name;
@@ -26,11 +30,11 @@ public class Supplier {
 	@OneToMany(mappedBy="supplier",fetch = FetchType.EAGER)
 	private Set<Product> products;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,65 +18,91 @@ import com.niit.fairdeal.domain.Supplier;
 @Repository("supplierDAO")
 public class SupplierDAOImpl implements SupplierDAO {
 	
-	@Autowired SessionFactory sessionFactory;
+	private static final Logger log = LoggerFactory.getLogger(SupplierDAOImpl.class);
+	
+	@Autowired 
+	private SessionFactory sessionFactory;
 
 	public SupplierDAOImpl(SessionFactory sessionFactory) {
 	
+		log.info("Supplier Session");
 		this.sessionFactory = sessionFactory;
 	}
+	
+	public Session getSession()
+	{
+		return sessionFactory.getCurrentSession();
+	}
 
+	@Transactional
 	@SuppressWarnings("unchecked")
 	public List<Supplier> getAllSuppliers() {
 		
-		return	sessionFactory.getCurrentSession().createQuery("from Supplier").list();
+		log.debug("Body of the method getAllSuppliers");
+		return	getSession().createQuery("from Supplier").list();
 	}
 
+	@Transactional
 	public boolean createSupplier(Supplier supplier) {
+		log.debug("Starting of the method createSupplier");
 		try
 		{
-		sessionFactory.getCurrentSession().save(supplier);
+		getSession().save(supplier);
+		log.debug("Ending of the method createSupplier");
 		return true;
 		} catch(Exception e)
 		{
 			e.printStackTrace(); 
+			log.error("Exception occurred while creating supplier");
+			log.error(e.getMessage());
 			return false;
 		}	
 	}
 
+	@Transactional
 	public boolean updateSupplier(Supplier supplier) {
+		
+		log.debug("Starting of the method updateSupplier");
 		try {
-			sessionFactory.getCurrentSession().update(supplier);
+			getSession().update(supplier);
+			log.debug("Ending of the method updateSupplier");
 			return true;
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
+			log.error("Exception occurred while updating supplier");
+			log.error(e.getMessage());
 			return false;
 		}
 	}
 
+	@Transactional
 	public boolean deleteSupplier(Supplier supplier) {
-		Supplier supplier1 = null;
+
+		log.debug("Starting of the method deleteSupplier");
 		try {
-			if(supplier.getId() != null)
-				supplier1 = getSupplierByID(supplier.getId());
-			else if(supplier.getName() != null)
-				supplier1 = getSupplierByName(supplier.getName());
-			sessionFactory.getCurrentSession().delete(supplier1);
+			getSession().delete(supplier);
+			log.debug("Ending of the method deleteSupplier");
 			return true;
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			return false;	
+			log.error("Exception occurred while deleting supplier");
+			log.error(e.getMessage());
+			return false;
 		}
 	}
 
-	public Supplier getSupplierByID(String id) {
-		
+	@Transactional
+	public Supplier getSupplierByID(int id) {
+	
+		log.debug("Body of the methpd getSupplierByID");
 		return (Supplier) sessionFactory.getCurrentSession().get(Supplier.class, id);
 	}
 
+	@Transactional
 	public Supplier getSupplierByName(String name) {
 		
+		log.debug("Body of the method getSupplierByName");
 		return (Supplier) sessionFactory.getCurrentSession().createQuery("from Supplier where name ='"+name+"'").list().get(0);
 	}
 }

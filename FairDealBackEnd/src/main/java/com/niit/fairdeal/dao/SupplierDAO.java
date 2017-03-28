@@ -19,7 +19,7 @@ public interface SupplierDAO {
 		public boolean deleteSupplier(Supplier supplier);
 		
 		// get supplier by id
-		public Supplier getSupplierByID(String id);
+		public Supplier getSupplierByID(int id);
 		
 		// get supplier by name
 		public Supplier getSupplierByName(String name);

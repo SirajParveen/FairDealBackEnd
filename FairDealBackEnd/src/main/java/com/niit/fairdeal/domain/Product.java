@@ -2,9 +2,11 @@ package com.niit.fairdeal.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -13,10 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Component
+@Table(name= "Product")
 public class Product {
 	
 	@Id
-	private String id;
+	@GeneratedValue
+	private int id;
 	
 	@NotEmpty(message="Product name should not be empty")
 	private String name;
@@ -27,11 +31,9 @@ public class Product {
 	@NotEmpty
 	private String description;
 	
-	@NotEmpty
-	private String category_id; 
+	private int category_id; 
 	
-	@NotEmpty
-	private String supplier_id;
+	private int supplier_id;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "category_id", updatable = false, insertable = false, nullable = false)
@@ -45,11 +47,11 @@ public class Product {
 	@Transient
 	private MultipartFile image;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -77,19 +79,19 @@ public class Product {
 		this.description = description;
 	}
 
-	public String getCategory_id() {
+	public int getCategory_id() {
 		return category_id;
 	}
 
-	public void setCategory_id(String category_id) {
+	public void setCategory_id(int category_id) {
 		this.category_id = category_id;
 	}
 
-	public String getSupplier_id() {
+	public int getSupplier_id() {
 		return supplier_id;
 	}
 
-	public void setSupplier_id(String supplier_id) {
+	public void setSupplier_id(int supplier_id) {
 		this.supplier_id = supplier_id;
 	}
 

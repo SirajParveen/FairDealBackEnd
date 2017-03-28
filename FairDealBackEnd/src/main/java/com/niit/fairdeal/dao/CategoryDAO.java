@@ -23,7 +23,7 @@ public interface CategoryDAO {
 	public boolean deleteCategory(Category category);
 	
 	// get category by id
-	public Category getCategoryByID(String id);
+	public Category getCategoryByID(int id);
 
 	// get category by name
 	public Category getCategoryByName(String name);

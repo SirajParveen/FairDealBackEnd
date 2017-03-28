@@ -3,7 +3,10 @@ package com.niit.fairdeal.DAOImpl;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,51 +17,107 @@ import com.niit.fairdeal.domain.Cart;
 @SuppressWarnings("deprecation")
 @Repository("cartDAO")
 public class CartDAOImpl implements CartDAO {
+	
+	public static final Logger log = LoggerFactory.getLogger(CartDAOImpl.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public CartDAOImpl() {
-
-	}
-
 	public CartDAOImpl(SessionFactory sessionFactory) {
+		log.info("Cart Session");
 		this.sessionFactory = sessionFactory;
+	}
+	
+	public Session getSession()
+	{
+		return sessionFactory.getCurrentSession();
 	}
 
 	@SuppressWarnings({ "unchecked" })
 	@Transactional
-	public List<Cart> getAllCarts(String userID) 
+	public List<Cart> getAllCarts(int userID) 
 	{
+		log.debug("Starting of the method getAllCarts");
+		
 		String hql = "from Cart where userID=" + "'" + userID + "'  and status = " + "'N'";
 		@SuppressWarnings({ "rawtypes" })
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		
+		log.debug("Ending of the method getAllCarts");
 		return query.list();
 	}
 
 	@Transactional
-	public boolean saveCart(Cart cart) {
+	public Cart get(int id) 
+	{
+		log.debug("Body of the method get");
+		return (Cart) getSession().get(Cart.class, id);
+	}
+	
+	@Transactional
+	public boolean createCart(Cart cart) {
+		
+		log.debug("Starting of the method createCart");
 		
 		/*cart.setId(getMaxId());*/
 		try {
-			sessionFactory.getCurrentSession().save(cart);
+			getSession().save(cart);
+			log.debug("Ending of the method createCart");
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.error("Exception occurred while creating cart");
+			log.error(e.getMessage());
+			return false;
+		}
+	}
+	
+	@Transactional
+	public boolean deleteCart(Cart cart) {
+		
+		log.debug("Body of the method deleteCart");
+		cart.setStatus('X');
+		return updateCart(cart);
+	}
+
+	@Transactional
+	public boolean updateCart(Cart cart) {
+		
+		log.debug("Starting of the method updateCart");
+		try {
+			getSession().update(cart);
+			log.debug("Ending of the method updateCart");
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Exception occurred while updating cart");
+			log.error(e.getMessage());
 			return false;
 		}
 	}
 
 	@Transactional
-	public Long getTotalAmount(String userID) {
+	public Long getTotalAmount(int userID) {
+		
+		log.debug("Starting of the method getTotalAmount");
 		
 		String hql = "select sum(price*quantity) from Cart where userID=" + "'" + userID + "' " + "  and status = " + "'N'";
 
 		@SuppressWarnings("rawtypes")
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		
+		log.debug("Ending of the method getTotalAmount");
 		return (Long) query.uniqueResult();
+	}
+
+	public int getAllCarts(String loggedInUserid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public Object getTotalAmount(String loggedInUserid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*public Long getMaxId() {
@@ -68,7 +127,7 @@ public class CartDAOImpl implements CartDAO {
 		{
 			String hql = "select max(id) from Cart";
 			@SuppressWarnings("rawtypes")
-			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			Query query = getSession().createQuery(hql);
 			maxID = (Long) query.uniqueResult();
 		} 
 		catch (Exception e) 
@@ -78,26 +137,4 @@ public class CartDAOImpl implements CartDAO {
 		}
 		return maxID - 1;
 	}*/
-
-	public Cart get(String id) {
-	
-		return (Cart) sessionFactory.getCurrentSession().get(Cart.class, id);
-	}
-
-	public boolean deleteCart(Cart cart) {
-		
-		cart.setStatus('X');
-		return updateCart(cart);
-	}
-
-	public boolean updateCart(Cart cart) {
-		try {
-			sessionFactory.getCurrentSession().update(cart);
-			return true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-	}
 }

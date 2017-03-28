@@ -94,10 +94,8 @@ public class ApplicationContextConfig {
 	@Autowired
 	@Bean(name = "productDAO")
 	public ProductDAO getProductDao(SessionFactory sessionFactory) {
-			return new ProductDAOImpl(sessionFactory);
-			
+			return new ProductDAOImpl(sessionFactory);		
 	}
-	
 	
 	@Autowired
 	@Bean(name = "supplierDAO")

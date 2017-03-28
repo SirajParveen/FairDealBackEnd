@@ -1,12 +1,16 @@
 package com.niit.fairdeal.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="user_details")
+@Table(name= "User")
 @Component
 public class User {
 	

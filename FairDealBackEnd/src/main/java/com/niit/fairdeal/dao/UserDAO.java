@@ -19,11 +19,11 @@ public interface UserDAO {
 	public boolean deleteUser(User user);
 	
 	// get user by id
-	public User getUserByID(String id);
+	public User getUserByID(int id);
 	
 	// get user by name
 	public User getUserByName(String name);
 	
 	// validate the user
-	public User validateUser(String id, String password);
+	public User validateUser(int id, String password);
 }

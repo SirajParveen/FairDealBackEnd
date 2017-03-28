@@ -19,7 +19,7 @@ public interface ProductDAO {
 		public boolean deleteProduct(Product product);
 		
 		// get product by id
-		public Product getProductByID(String id);
+		public Product getProductByID(int id);
 		
 		// get product by name
 		public Product getProductByName(String name);

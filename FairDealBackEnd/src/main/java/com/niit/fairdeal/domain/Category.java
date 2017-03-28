@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -13,7 +14,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name = "Category") // if the class name and table name is different
+@Table(name = "Category") //  the class name and table name is different
 @Component // if want to create instance of Class Category - category
 public class Category {
 	
@@ -21,7 +22,8 @@ public class Category {
 	// generate getter/setter methods
 
 	@Id
-	private String id;
+	@GeneratedValue
+	private int id;
 	
 	@Column(name = "name")  // if the field name and property name is different
 	@NotEmpty(message="Category name should not be empty")
@@ -33,11 +35,11 @@ public class Category {
 	@OneToMany(mappedBy="category",fetch = FetchType.EAGER)
 	private Set<Product> products;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

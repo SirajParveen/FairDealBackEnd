@@ -6,15 +6,19 @@ import com.niit.fairdeal.domain.Cart;
 
 public interface CartDAO {
 	
-	public List<Cart> getAllCarts(String userID);
+	public List<Cart> getAllCarts(int userID);
 	
-	public Cart get(String id);
+	public Cart get(int id);
 
-	public boolean saveCart(Cart cart);
+	public boolean createCart(Cart cart);
 	
 	public boolean deleteCart(Cart cart); 
 	
 	public boolean updateCart(Cart cart);
 	
-	public Long getTotalAmount(String id);
+	public Long getTotalAmount(int id);
+
+	public int getAllCarts(String loggedInUserid);
+
+	public Object getTotalAmount(String loggedInUserid);
 }

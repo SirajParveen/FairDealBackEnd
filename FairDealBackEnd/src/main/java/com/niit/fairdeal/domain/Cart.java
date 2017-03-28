@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,16 +12,16 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table
+@Table(name= "Cart")
 @Component
 public class Cart {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue
 	private int id;
 	
 	@Column(name="user_id")
-	private String userID;
+	private int userID;
 	
 	@NotEmpty
 	private int price;
@@ -37,6 +36,7 @@ public class Cart {
 	private Date addedDate;
 	
 	@NotEmpty
+	@Column(columnDefinition = "Integer default 1")
 	private int quantity;
 
 	public int getId() {
@@ -47,11 +47,11 @@ public class Cart {
 		this.id = id;
 	}
 
-	public String getUserID() {
+	public int getUserID() {
 		return userID;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserID(int userID) {
 		this.userID = userID;
 	}
 
