@@ -24,8 +24,6 @@ public class User {
 	private String name;
 	
 	@NotEmpty(message="Password should not be empty")
-	/*@Min(5)
-	@Max(15)*/
 	private String password;
 	
 	@NotEmpty

@@ -4,10 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,8 +15,94 @@ import com.niit.fairdeal.domain.Product;
 @Transactional
 @Repository("productDAO")
 public class ProductDAOImpl implements ProductDAO {
+	@Autowired
+	private SessionFactory sessionFactory;
 	
-	private static final Logger log = LoggerFactory.getLogger(ProductDAOImpl.class);
+	public ProductDAOImpl(SessionFactory sessionFactory)
+	{
+		this.sessionFactory=sessionFactory;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Product> getAllProducts() 
+	{
+	return	sessionFactory.getCurrentSession().createQuery("from Product").list();
+	}
+
+	public boolean createProduct(Product product) 
+	{
+		try {
+			sessionFactory.getCurrentSession().save(product);
+			return true;
+			}
+		catch (Exception e)
+		{
+		
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean updateProduct(Product product) {
+		try {
+			sessionFactory.getCurrentSession().update(product);
+			return true;
+			}
+		catch (Exception e)
+		{
+		
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean deleteProduct(Product product) {
+		try {
+			/*if (product.getId() != null)
+				product1  = getProductById(product.getId());
+			else if (product.getName() != null)
+				product1 = getProductByName(product.getName());*/
+			sessionFactory.getCurrentSession().delete(product);
+			return true;
+			}
+		catch (Exception e)
+		{
+		
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public Product getProductByID(int id) {
+		return (Product) sessionFactory.getCurrentSession().createQuery("from Product where id='"+id+"'").uniqueResult();
+	}
+
+	public Product getProductByName(int name) {
+		return (Product) sessionFactory.getCurrentSession().createQuery("from Product where name='"+name+"'").list().get(0);
+	}
+	
+	@Transactional
+	public List<Product> navproduct(int id) {
+		String hql = "from Product where category_id= " + id;
+		@SuppressWarnings("rawtypes")
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings("unchecked")
+		List<Product> catproduct = (List<Product>) query.list();
+		return catproduct;
+	}
+	
+		@Transactional
+		@SuppressWarnings("unchecked")
+		public List<Product> getproduct(int id) {
+			String hql="from Product where id= "+id;
+			@SuppressWarnings("rawtypes")
+			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			List<Product> listProduct = (List<Product>) query.list();
+			return listProduct;
+		}
+	}
+
+	
+	/*private static final Logger log = LoggerFactory.getLogger(ProductDAOImpl.class);
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -106,4 +190,15 @@ public class ProductDAOImpl implements ProductDAO {
 		log.debug("Body of the method getProductByName");
 		return (Product) getSession().createQuery("from Product where name ='"+name+"'").list().get(0);
 	}
+	
+	@Transactional
+	public List<Product> navproduct(int id) {
+		String hql = "from Product where category_id= " + id;
+		@SuppressWarnings({ "rawtypes" })
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		@SuppressWarnings({ "unchecked" })
+		List<Product> catproduct = (List<Product>) query.list();
+		return catproduct;
+	}
 }
+*/

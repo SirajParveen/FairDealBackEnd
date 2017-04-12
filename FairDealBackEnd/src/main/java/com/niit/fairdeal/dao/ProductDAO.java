@@ -6,7 +6,7 @@ import com.niit.fairdeal.domain.Product;
 
 public interface ProductDAO {
 	
-		// get all products
+		/*// get all products
 		public List<Product> getAllProducts();
 		
 		// create product
@@ -23,4 +23,21 @@ public interface ProductDAO {
 		
 		// get product by name
 		public Product getProductByName(String name);
+		
+		public List<Product> navproduct(int id);*/
+public List<Product> getAllProducts();
+	
+	public boolean createProduct(Product product);
+	
+	public boolean updateProduct(Product product);
+	
+	public boolean deleteProduct(Product product);
+	
+	public Product getProductByID(int id);
+	
+	public Product getProductByName(int name);
+	
+	public List<Product> navproduct(int id);
+	
+	public List<Product> getproduct(int id);
 }

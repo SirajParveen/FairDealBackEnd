@@ -5,20 +5,25 @@ import java.util.List;
 import com.niit.fairdeal.domain.Cart;
 
 public interface CartDAO {
-	
-	public List<Cart> getAllCarts(int userID);
-	
-	public Cart get(int id);
+	public List<Cart> list();
 
-	public boolean createCart(Cart cart);
-	
-	public boolean deleteCart(Cart cart); 
-	
-	public boolean updateCart(Cart cart);
-	
-	public Long getTotalAmount(int id);
+	public boolean save(Cart cart);
 
-	public int getAllCarts(String loggedInUserid);
+	public boolean update(Cart cart);
 
-	public Object getTotalAmount(String loggedInUserid);
+	public boolean delete(Cart cart);
+
+	public List<Cart> get(int userid);
+	
+	public Cart getitem(int cartId);
+
+	public Cart getproduct(int id,int userid);
+	
+	//public Cart getproduct(int cartid);
+
+	public long cartsize(int userId);
+
+	public long CartPrice(int userId);
+
+	public void pay(int userId);
 }

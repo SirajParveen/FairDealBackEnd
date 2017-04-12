@@ -16,16 +16,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.fairdeal.DAOImpl.CartDAOImpl;
 import com.niit.fairdeal.DAOImpl.CategoryDAOImpl;
+import com.niit.fairdeal.DAOImpl.CheckoutDAOImpl;
 import com.niit.fairdeal.DAOImpl.ProductDAOImpl;
 import com.niit.fairdeal.DAOImpl.SupplierDAOImpl;
 import com.niit.fairdeal.DAOImpl.UserDAOImpl;
 import com.niit.fairdeal.dao.CartDAO;
 import com.niit.fairdeal.dao.CategoryDAO;
+import com.niit.fairdeal.dao.CheckoutDAO;
 import com.niit.fairdeal.dao.ProductDAO;
 import com.niit.fairdeal.dao.SupplierDAO;
 import com.niit.fairdeal.dao.UserDAO;
 import com.niit.fairdeal.domain.Cart;
 import com.niit.fairdeal.domain.Category;
+import com.niit.fairdeal.domain.Checkout;
 import com.niit.fairdeal.domain.Product;
 import com.niit.fairdeal.domain.Supplier;
 import com.niit.fairdeal.domain.User;
@@ -52,10 +55,8 @@ public class ApplicationContextConfig {
 	}
 
 	private Properties getHibernateProperties() {
+		
 		Properties properties = new Properties();
-		
-		
-		/*properties.put("getH2DataSource()", getH2DataSource());*/
 		properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 		properties.put("hibernate.show_sql", "true");
 		properties.put("hibernate.hbm2ddl.auto", "update");
@@ -76,6 +77,7 @@ public class ApplicationContextConfig {
 		sessionBuilder.addAnnotatedClass(Product.class);
 		sessionBuilder.addAnnotatedClass(Supplier.class);
 		sessionBuilder.addAnnotatedClass(Cart.class);
+		sessionBuilder.addAnnotatedClass(Checkout.class);
 		
 		//Alternate to above steps, you can add all the domain objects using the following stmts
 		//sessionBuilder.scanPackages("com.niit.fairdeal.domain");
@@ -107,15 +109,23 @@ public class ApplicationContextConfig {
 	@Bean(name = "categoryDAO")
 	public CategoryDAO getCategoryDao(SessionFactory sessionFactory){
 		return  new CategoryDAOImpl(sessionFactory);
-	}
+	} 
+	
 	@Autowired
 	@Bean(name = "userDAO")
 	public UserDAO getUserDao(SessionFactory sessionFactory){
 		return  new UserDAOImpl(sessionFactory);
 	}
+	
 	@Autowired
 	@Bean(name = "cartDAO")
 	public CartDAO getCartDao(SessionFactory sessionFactory){
 		return  new CartDAOImpl(sessionFactory);
 	}	
+	
+	@Autowired
+	@Bean(name = "checkoutDAO")
+	public CheckoutDAO getCheckoutDao(SessionFactory sessionFactory){
+		return new CheckoutDAOImpl(sessionFactory);
+	}
 }
