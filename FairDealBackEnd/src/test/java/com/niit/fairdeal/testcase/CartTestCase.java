@@ -1,4 +1,4 @@
-/*package com.niit.fairdeal.testcase;
+package com.niit.fairdeal.testcase;
 
 import org.junit.BeforeClass;
 import static org.junit.Assert.*;
@@ -34,49 +34,29 @@ public class CartTestCase
 	@Test
 	public void getAllCartsTestCase(String userID)
 	{
-		int recordsFromDB = cartDAO.getAllCarts("01").size();
+		int recordsFromDB = cartDAO.list().size();
 		assertEquals("getAllCartsTestCase", 12, recordsFromDB);
 	}
 	
 	@Test
 	public void saveCartTestCase()
 	{
-		cart.setId(100L);
-		cart.setPrice(2000);
-		cart.setProductName("samsung j2");
-		cart.setQuantity(1);
-		cart.setStatus('N');
-		cart.setUserID("04");
+		cart.setPrice(20000L);
+		cart.setProductid(68);
+		cart.setProductname("samsung galaxy s8 edge");
+		cart.setQuantity(2);
+		cart.setStatus("P");
+		cart.setUserid(13);
 		
-		boolean flag = cartDAO.saveCart(cart);
+		boolean flag = cartDAO.save(cart);
 		assertEquals("saveCartTestCase", true, flag);
-	}
-	
-	@Test
-	public void getTotalAmountTestCase()
-	{
-		Long flag = cartDAO.getTotalAmount("04");
-		assertEquals("getTotalAmountTestCase", null, flag);	
-	}
-	
-	@Test
-	public Cart get(String id)
-	{
-		
 	}
 	
 	@Test
 	public void deleteCartTestCase()
 	{
 		cart.setId(5);
-		boolean flag = cartDAO.deleteCart(cart);
+		boolean flag = cartDAO.delete(cart);
 		assertEquals("deleteCartTestCase", true, flag);
 	}
-	
-	@Test
-	public boolean updateCart(Cart cart)
-	{
-		
-	}
 }
-*/

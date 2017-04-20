@@ -57,10 +57,6 @@ public class ProductDAOImpl implements ProductDAO {
 
 	public boolean deleteProduct(Product product) {
 		try {
-			/*if (product.getId() != null)
-				product1  = getProductById(product.getId());
-			else if (product.getName() != null)
-				product1 = getProductByName(product.getName());*/
 			sessionFactory.getCurrentSession().delete(product);
 			return true;
 			}
@@ -76,7 +72,7 @@ public class ProductDAOImpl implements ProductDAO {
 		return (Product) sessionFactory.getCurrentSession().createQuery("from Product where id='"+id+"'").uniqueResult();
 	}
 
-	public Product getProductByName(int name) {
+	public Product getProductByName(String name) {
 		return (Product) sessionFactory.getCurrentSession().createQuery("from Product where name='"+name+"'").list().get(0);
 	}
 	
@@ -100,105 +96,3 @@ public class ProductDAOImpl implements ProductDAO {
 			return listProduct;
 		}
 	}
-
-	
-	/*private static final Logger log = LoggerFactory.getLogger(ProductDAOImpl.class);
-
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	public ProductDAOImpl(SessionFactory sessionFactory) 
-	{
-		log.info("Product Session");
-		this.sessionFactory = sessionFactory;
-	}
-	
-	public Session getSession()
-	{
-		return sessionFactory.getCurrentSession();
-	}
-	
-	@Transactional
-	@SuppressWarnings("unchecked")
-	public List<Product> getAllProducts() {
-		
-		log.debug("Body of the method getAllProducts");
-		return getSession().createQuery("from Product").list();
-	}
-
-	@Transactional
-	public boolean createProduct(Product product) {
-		
-		log.debug("Starting of the method createProduct");
-		try
-		{
-			getSession().save(product);
-			log.debug("Ending of the method createProduct");
-		return true;
-		} catch(Exception e)
-		{
-			e.printStackTrace(); 
-			log.error("Exception occurred while creating product");
-			log.error(e.getMessage());
-			return false;
-		}	
-	}
-
-	@Transactional
-	public boolean updateProduct(Product product) {
-		
-		log.debug("Starting of the method updateProduct");
-		try {
-			getSession().update(product);
-			log.debug("Ending of the method updateProduct");
-			return true;
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
-			log.error("Exception occurred while updating product");
-			log.error(e.getMessage());
-			return false;
-		}
-	}
-
-	@Transactional
-	public boolean deleteProduct(Product product) {
-		
-		log.debug("Starting of the method deleteProduct");
-		try {
-			getSession().delete(product);
-			log.debug("Ending of the method deleteProduct");
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			log.error("Exception occurred while deleting product");
-			log.error(e.getMessage());
-			return false;
-		}
-	}
-
-	@Transactional
-	public Product getProductByID(int id) {
-		
-		log.debug("Body of the method getProductByID");
-		return (Product) getSession().get(Product.class, id);
-	}
-
-	@Transactional
-	public Product getProductByName(String name) {
-		
-		log.debug("Body of the method getProductByName");
-		return (Product) getSession().createQuery("from Product where name ='"+name+"'").list().get(0);
-	}
-	
-	@Transactional
-	public List<Product> navproduct(int id) {
-		String hql = "from Product where category_id= " + id;
-		@SuppressWarnings({ "rawtypes" })
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		@SuppressWarnings({ "unchecked" })
-		List<Product> catproduct = (List<Product>) query.list();
-		return catproduct;
-	}
-}
-*/

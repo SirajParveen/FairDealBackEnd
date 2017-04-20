@@ -1,4 +1,4 @@
-/*package com.niit.fairdeal.testcase;
+package com.niit.fairdeal.testcase;
 
 import static org.junit.Assert.*;
 
@@ -42,7 +42,6 @@ public class SupplierTestCase {
 	@Test
 	public void createSupplierTestCase() {
 		
-		supplier.setID("01");
 		supplier.setName("Kushal");
 		supplier.setAddress("kurnool");
 		
@@ -54,7 +53,6 @@ public class SupplierTestCase {
 	@Test
 	public void updateSupplierTestCase() {
 
-		supplier.setID("04");
 		supplier.setName("Pradeep");
 		supplier.setAddress("KPHB");
 
@@ -66,7 +64,7 @@ public class SupplierTestCase {
 	@Test
 	public void deleteSupplierTestCase()
 	{
-		supplier.setID("01");
+		supplier.setId(01);
 		
 		boolean flag = supplierDAO.deleteSupplier(supplier);
 		
@@ -76,7 +74,7 @@ public class SupplierTestCase {
 	@Test
 	public void getSupplierByIDTestCase()
 	{
-		supplier = supplierDAO.getSupplierByID("02");
+		supplier = supplierDAO.getSupplierByID(02);
 		
 		assertEquals("getSupplierByIDTestCase", null, supplier);
 	}
@@ -89,4 +87,3 @@ public class SupplierTestCase {
 		assertEquals("getSupplierByNameTestCase", null, supplier);
 	}
 }
-*/

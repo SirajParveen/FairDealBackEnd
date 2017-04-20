@@ -1,4 +1,4 @@
-/*package com.niit.fairdeal.testcase;
+package com.niit.fairdeal.testcase;
 
 import static org.junit.Assert.*;
 
@@ -42,12 +42,11 @@ public class ProductTestCase {
 	@Test
 	public void createProductTestCase()
 	{
-		product.setID("04");
 		product.setName("Handbag");
-		product.setPrice("2500");
+		product.setPrice(2500);
 		product.setDescription("This is Handbag");
-		product.setCategory_ID("06");
-		product.setSupplier_ID("01");
+		product.setCategory_id(06);
+		product.setSupplier_id(01);
 		
 		boolean flag = productDAO.createProduct(product);
 		
@@ -57,12 +56,11 @@ public class ProductTestCase {
 	@Test
 	public void updateProductTestCase()
 	{
-		product.setID("03");
 		product.setName("Lenovo k3");
 		product.setDescription("This is Lenovo mobile brand");
-		product.setPrice("10000");
-		product.setCategory_ID("03");
-		product.setSupplier_ID("02");
+		product.setPrice(10000);
+		product.setCategory_id(03);
+		product.setSupplier_id(02);
 		 
 		boolean flag = productDAO.updateProduct(product);
 		
@@ -72,7 +70,7 @@ public class ProductTestCase {
 	@Test
 	public void deleteProductTestCase()
 	{
-		product.setID("04");
+		product.setId(04);
 		
 		boolean flag = productDAO.deleteProduct(product);
 		
@@ -82,7 +80,7 @@ public class ProductTestCase {
 	@Test
 	public void getProductByIDTestCase()
 	{
-		product = productDAO.getProductByID("01");
+		product = productDAO.getProductByID(01);
 		
 		assertEquals("getProductByIDTestCase", null, product);
 	}
@@ -94,4 +92,4 @@ public class ProductTestCase {
 		
 		assertEquals("getProductByNameTestCase", null, product);
 	}
-}*/
+}

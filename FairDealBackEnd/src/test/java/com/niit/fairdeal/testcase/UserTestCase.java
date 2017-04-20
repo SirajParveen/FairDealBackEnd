@@ -1,4 +1,4 @@
-/*package com.niit.fairdeal.testcase;
+package com.niit.fairdeal.testcase;
 
 import static org.junit.Assert.*;
 
@@ -42,20 +42,12 @@ public class UserTestCase {
 	@Test
 	public void createUserTestCase()
 	{
-		
-		user.setId("piyush");
 		user.setName("piyush");
 		user.setPassword("piyush");
 		user.setMail("piyush@gmail.com");
 		user.setContact("098765645");
 		user.setEnabled(true);
 		user.setRole("ROLE_USER");
-
-		user.setId("04");
-		user.setName("Pooja");
-		user.setPassword("pooja");
-		user.setMail("pooja@gmail.com");
-		user.setContact("76543567879");
 		
 		boolean flag = userDAO.createUser(user);
 		
@@ -65,7 +57,6 @@ public class UserTestCase {
 	@Test
 	public void updateUserTestCase()
 	{
-		user.setId("03");
 		user.setName("Akhil");
 		user.setPassword("akhil");
 		user.setContact("8765432467");
@@ -89,7 +80,7 @@ public class UserTestCase {
 	@Test
 	public void getUserByIDTestCase()
 	{
-		user = userDAO.getUserByID("01");
+		user = userDAO.getUserByID(01);
 		
 		assertEquals("getUserByIDTestCase", null, user);
 	}
@@ -105,9 +96,8 @@ public class UserTestCase {
 	@Test
 	public void validateUserTestCase()
 	{
-		User flag = userDAO.validateUser("01", "siraj");
+		User flag = userDAO.validateUser(01, "siraj");
 		
 		assertEquals("validateUserTestCase", true, flag);
 	}
 }
-*/
